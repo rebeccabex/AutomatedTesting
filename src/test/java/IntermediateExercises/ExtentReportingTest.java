@@ -1,3 +1,4 @@
+package IntermediateExercises;
 
 import org.openqa.selenium.WebDriver;
 
@@ -43,7 +44,6 @@ public class ExtentReportingTest {
 
         String username = "newuser";
         String password = "123password";
-
 
         loginTest.testCreateUser(driver, url, username, password);
         test.log(LogStatus.INFO, "User created");

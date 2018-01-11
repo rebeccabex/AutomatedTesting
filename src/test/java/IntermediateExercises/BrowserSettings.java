@@ -1,3 +1,5 @@
+package IntermediateExercises;
+
 public class BrowserSettings {
 
     private String browser;

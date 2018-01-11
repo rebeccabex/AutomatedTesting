@@ -1,3 +1,5 @@
+package IntermediateExercises;
+
 import org.junit.Test;
 
 public class TestClass {
