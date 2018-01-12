@@ -47,9 +47,9 @@ public class CookieTest {
 
     @Test
     public void cookieTest() {
-//        login();
-//        createCookie();
-//        logout();
+        login();
+        createCookie();
+        logout();
 
         driver.get("https://www.google.co.uk/");
         loadCookie();
@@ -65,7 +65,7 @@ public class CookieTest {
         driver.findElement(By.id("user-identifier-input")).sendKeys("rebeccabexb@gmail.com");
 
         // need to set temp password if using
-        driver.findElement(By.id("password-input")).sendKeys("");
+        driver.findElement(By.id("password-input")).sendKeys("temporary1101");
         driver.findElement(By.id("submit-button")).click();
 
         test.log(LogStatus.INFO, "Attempted to login");
@@ -170,7 +170,7 @@ public class CookieTest {
 
     public void checkLogin() {
 
-        driver.findElement(By.id("idcta-link")).click();
+            driver.findElement(By.id("idcta-link")).click();
         driver.findElement(By.id("idcta-link")).click();
 
         String bodyText = driver.findElement(By.tagName("body")).getText();
