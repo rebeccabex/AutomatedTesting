@@ -1,18 +1,25 @@
 package MouseActions;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import MouseActions.Pages.DemoQAPage;
+import MouseActions.Pages.DraggablePage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.*;
 
 public class DraggableTest {
 
-    private DemoQA demoQA;
+    static private DemoQA demoQA;
+    static private WebDriver driver;
+    static private DemoQAPage homePage;
+    static private DraggablePage draggable;
 
     @BeforeClass
-    public void setup() {
-
-        demoQA = new DemoQA("chrome");
-        demoQA.begin("draggable/");
+    public static void setup() {
+        demoQA = new DemoQA("firefox");
+        driver = demoQA.beginAndGetDriver();
+        homePage = demoQA.getHomePage();
+        draggable = PageFactory.initElements(driver, DraggablePage.class);
 
     }
 
@@ -21,13 +28,19 @@ public class DraggableTest {
         demoQA.end(3000);
     }
 
-    @Test(priority = 1, enabled = false)
-    public void testDefaultFunctionality() {
-        demoQA.clickById("ui-id-1");
+    @BeforeMethod
+    public void openDraggablePage() {
+        homePage.clickDraggableLink();
+    }
 
-        demoQA.moveByIdOffset("draggable", 100, 100);
-        demoQA.moveByIdOffset("draggable", 400, -50);
-        demoQA.moveByIdOffset("draggable", -200, 100);
+    @Test(priority = 1, enabled = true)
+    public void testDefaultFunctionality() {
+        draggable.clickDefaultTab();
+        demoQA.wait(1000);
+        draggable.moveDraggableBox(new Actions(driver),100, 100);
+        demoQA.wait(1000);
+        draggable.moveDraggableBox(new Actions(driver),-50, 200);
+        demoQA.wait(1000);
     }
 
     @Test(priority = 2, enabled = false)
@@ -48,7 +61,7 @@ public class DraggableTest {
 
     }
 
-    @Test(priority = 3, enabled = true)
+    @Test(priority = 3, enabled = false)
     public void testCursorStyle() {
         demoQA.clickById("ui-id-3");
 

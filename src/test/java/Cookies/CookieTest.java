@@ -19,16 +19,16 @@ import java.util.StringTokenizer;
 
 public class CookieTest {
 
-    String url;
-    WebDriver driver;
+    private String url;
+    private WebDriver driver;
 
-    ExtentReports report;
-    ExtentTest test;
+    private ExtentReports report;
+    private ExtentTest test;
 
     @BeforeClass
     public void setup() {
 
-        report = new ExtentReports("C:\\Users\\Admin\\Documents\\5AutomatedTesting\\cookie_test.html", true);
+        report = new ExtentReports("C:\\Users\\Admin\\Documents\\cookie_test.html", true);
 
         SetupDriver setupDriver = new SetupDriver();
 
@@ -65,7 +65,7 @@ public class CookieTest {
         driver.findElement(By.id("user-identifier-input")).sendKeys("rebeccabexb@gmail.com");
 
         // need to set temp password if using
-        driver.findElement(By.id("password-input")).sendKeys("temporary1101");
+        driver.findElement(By.id("password-input")).sendKeys("");
         driver.findElement(By.id("submit-button")).click();
 
         test.log(LogStatus.INFO, "Attempted to login");
@@ -145,7 +145,7 @@ public class CookieTest {
                     if (!(dt=str.nextToken()).equals("null")) {
                         expiry = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(dt);
                     }
-                    boolean isSecure = new Boolean(str.nextToken()).booleanValue();
+                    boolean isSecure = Boolean.parseBoolean(str.nextToken());
                     Cookie ck = new Cookie(name, value, domain, path, expiry, isSecure);
                     driver.manage().addCookie(ck);
                 }

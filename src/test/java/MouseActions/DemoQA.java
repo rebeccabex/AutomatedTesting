@@ -1,11 +1,14 @@
 package MouseActions;
 
+import MouseActions.Pages.DemoQAPage;
+import MouseActions.Pages.DraggablePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -25,12 +28,19 @@ public class DemoQA {
             System.setProperty("webdriver.gecko.driver", "C:/Users/Admin/Documents/webdriver/geckodriver.exe");
             driver = new FirefoxDriver();
         }
+        driver.navigate().to(url);
     }
 
-    public void begin(String page) {
+    public WebDriver begin(String page) {
         driver.manage().window().maximize();
-        url += page;
-        driver.get(url);
+        driver.navigate().to(url + "/" + page);
+        return driver;
+    }
+
+    public WebDriver beginAndGetDriver() {
+        driver.manage().window().maximize();
+        driver.navigate().to(url);
+        return driver;
     }
 
     public void end(int delay) {
@@ -38,6 +48,9 @@ public class DemoQA {
         driver.quit();
     }
 
+    public DemoQAPage getHomePage() {
+        return PageFactory.initElements(driver, DemoQAPage.class);
+    }
 
     public void typeTextById(String elementId, String text) {
         WebElement el = driver.findElement(By.id(elementId));
